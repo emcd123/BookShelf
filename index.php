@@ -1,5 +1,7 @@
 <?php
 session_start(); include('db/config.php');
+require('../vendor/autoload.php');
+
 $timeStamp = date("Y-m-d H:i");
 $username = $password = '';
 
