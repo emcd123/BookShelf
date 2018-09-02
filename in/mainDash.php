@@ -1,7 +1,9 @@
 <?php
 session_start(); include('db/config.php');
 $timeStamp = date("Y-m-d H:i");
-?> 
+$userName = $_SESSION['username'];
+$userId = $_SESSION['userId'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@ $timeStamp = date("Y-m-d H:i");
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
- 
+
 <style>
 .error {color: #FF0000;}
 
@@ -21,12 +23,12 @@ $timeStamp = date("Y-m-d H:i");
 </style>
 <!-- To set the alert from an unsuccesful login to disappear-->
 <script>
-	//setTimeout("$('.feedback').slideUp()", 5000); 
+	//setTimeout("$('.feedback').slideUp()", 5000);
 </script>
 </head>
 
-<body>  
-<?php echo 'hello'; ?>
+<body>
+<?php echo $userId; ?>
 
 </body>
 </html>
