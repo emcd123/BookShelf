@@ -33,9 +33,9 @@ body {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 52px;
+    top: 0;
     left: 0;
-    background-color: #333;
+    background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -43,8 +43,8 @@ body {
 .sidenav a {
     padding: 6px 6px 6px 32px;
     text-decoration: none;
-    font-size: 17px;
-    color: #f2f2f2;
+    font-size: 25px;
+    color: #818181;
     display: block;
 }
 
@@ -82,15 +82,6 @@ body {
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
-	text-align: center;
-	width: 200px;
-}
-.topnav a.user {
-  background-color: #333;
-  color: white;
-	text-align: right;
-	width: 800px;
-	right: 0;
 }
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
@@ -99,26 +90,29 @@ body {
 </style>
 </head>
 <body>
+
   <div class="topnav">
-    <a class="active" href="mainDash.php">BookShelf</a>
+    <a class="active" href="#home">Home</a>
     <a href="#news">News</a>
     <a href="#contact">Contact</a>
     <a href="#about">About</a>
-		<a class="user" href="#"> <?php echo $userName; ?> </a>
-		<button type="button" class="btn btn-success btn-sm" onclick="location.href='../index.php'" style="margin-top: 12px;"> Log Out </button>
   </div>
-	<div class="sidenav">
-		<a href="#">DashBoard</a>
-		<a href="#">Shelves</a>
-		<a href="#">Reading Challenge</a>
-		<a href="#">Settings</a>
-	</div>
 
-  <div style="padding-left:250px">
+  <div style="padding-left:16px">
     <h2>Top Navigation Example</h2>
     <p>Some content..</p>
   </div>
+  
+<div class="sidenav">
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
 
-
+<div class="main">
+  <h2>Sidenav Example</h2>
+  <p>This sidenav is always shown.</p>
+</div>
 </body>
 </html>

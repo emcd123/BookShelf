@@ -59,9 +59,13 @@ if(isset($_POST['register']) ){
 
 <style>
 .error {color: #FF0000;}
-
+.jumbotron{
+	height: 100%;
+	bottom: 0;
+}
 .jumbotron-fluid {
 	background-color: grey;
+	height: 100%;
 }
 </style>
 <!-- To set the alert from an unsuccesful login to disappear-->
