@@ -11,6 +11,9 @@ TBD
 Installation
 ------------
 
+Is not hosted online curretly therefore to run the site you need to use localhost and the following technologies.
+
+
 Full LAMP stack needed
 Developed In Ubuntu (Peppermint OS)
 Apache Web Server https://httpd.apache.org/
@@ -20,6 +23,7 @@ PHP 7 http://php.net/
 Also required:
   Bootstrap
   jQuery
+  Adminer
 
 Contribute
 ----------
