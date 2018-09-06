@@ -52,8 +52,3 @@ Support
 
 - Issue Tracker: github.com/$project/HomeChef/issues
 - Docs: https://emcd123.github.io/HomeChef/
-
-License
--------
-
-The project is licensed under the BSD license.
