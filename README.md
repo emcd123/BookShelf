@@ -31,6 +31,7 @@ Support
 -------
 
 - Issue Tracker: github.com/$project/$BookShelf/issues
+- Docs: https://emcd123.github.io/BookShelf/
 
 License
 -------
