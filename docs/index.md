@@ -6,12 +6,15 @@ Title: BookShelf
 Documentation
 ========
 ##### Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis)  
+[Overview](#overview)  
+[Installation](#installation)
+[Support](#support)
+
 ...snip...    
 <a name="headers"/>
 ## Headers
 
+<a name"overview"/>
 Overview
 --------
 
@@ -42,8 +45,3 @@ Support
 
 - Issue Tracker: github.com/$project/$BookShelf/issues
 - Docs: https://emcd123.github.io/BookShelf/
-
-License
--------
-
-The project is licensed under the BSD license.
