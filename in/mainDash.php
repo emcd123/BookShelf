@@ -7,6 +7,7 @@ if($userId === NULL){
 	header("Location:index.php");
 	exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,10 @@ if($userId === NULL){
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <link rel = "stylesheet" type = "text/css" href = "../stylesheets/navigationBars.css" />
+
+<script>
+	setTimeout("$('.timeout').slideUp()", 2000);
+</script>
 </head>
 <body>
   <div class="topnav">
@@ -33,11 +38,28 @@ if($userId === NULL){
 		<a href="#">Settings</a>
 	</div>
 
-  <div style="padding-left:250px">
-    <h2>Top Navigation Example</h2>
-    <p>Some content..</p>
+  <div class="standard timeout">
+    <h2>Welcome <?php echo $userName; ?> </h2>
+    <p>What's for dinner tonight?</p>
+	</div>
+	<div class="standard">
+		<?php
+		$sql = "SELECT * FROM recipes WHERE userId = '$userId' AND deleted IS NOT NULL";
+		$query = mysqli_query($conn, $sql);
+		$numrows = mysqli_num_rows($query);
+		if($numrows > 0 ){
+
+		}
+		else{
+			echo '<p> It appears you have not added any recipes just yet. </p>';
+		}
+		?>
   </div>
 
-
+	<!-- jQuery first, then Tether, then Bootstrap JS. -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	</body>
 </body>
 </html>

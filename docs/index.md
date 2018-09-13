@@ -9,8 +9,8 @@ Documentation
 [Overview](#overview)  
 [Installation](#installation)
 [Support](#support)
-[index](#pages/index)
-[mainDash](#pages/mainDash)
+[index](#index)
+[mainDash](#mainDash)
 [topnav](#topnav)
 [sidenav](#sidenav)
 
@@ -48,7 +48,19 @@ Support
 - Issue Tracker: github.com/$project/$BookShelf/issues
 - Docs: https://emcd123.github.io/BookShelf/
 
+index
+-----
 
+Greets the user on site load with a login form.
+All other pages redirect the user to here if their userId session variable has not been set here.
+
+Upon successful login the userName and userId are stored in sessions.
+
+mainDash
+--------
+
+As with all subsequent pages other than index the css for the navigation bars as stored in /stylesheets/navigationBars.CSS.
+This contains links to all other major pages.
 
 topnav
 ------

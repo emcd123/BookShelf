@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(isset($_POST['register']) ){
 		$userName = $_POST['usernameSignUp'];
     $password = $_POST['passwordSignUp'];
-		echo $sql = "INSERT INTO users (username,password, lastLogin) VALUES ('$userName','$password','$timeStamp') ";
+		echo $sql = "INSERT INTO users (username,password, lastLogin, permissions) VALUES ('$userName','$password','$timeStamp', '2') ";
 		$result = mysqli_query($conn, $sql);
     if((!$result) && ($result->num_rows === NULL)){
 			die( "Data was not updated. Please try again later. <a href='question_review.php'>Click here</a> to return to Home page.".mysqli_error($conn));
@@ -45,6 +45,10 @@ if(isset($_POST['register']) ){
 
     header("location: :in/mainDash.php");
 	exit();
+}
+if(!isset($_POST['username'])){
+	session_destroy();
+	session_unset();
 }
 ?>
 <!DOCTYPE html>

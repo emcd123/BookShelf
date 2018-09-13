@@ -3,8 +3,13 @@
 
 body {
     font-family: "Lato", sans-serif;
+
 }
 
+.standard{
+  padding-left:250px;
+  padding-top: 50px;
+}
 .sidenav {
     height: 100%;
     width: 200px;
