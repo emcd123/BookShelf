@@ -1,0 +1,46 @@
+function convertToHoursMins($time, $format = '%02d:%02d') {
+	if ($time < 1) {
+		return;
+	}
+	$hours = floor($time / 60);
+	$minutes = ($time % 60);
+	return sprintf($format, $hours, $minutes);
+}
+
+
+function searchArrayDates($date,$array) {
+	$keyArray = array();
+	foreach ($array as $key => $val) {
+   if($val['date'] === $date) {
+	   array_push($keyArray, $key);
+   }
+  }
+  return $keyArray;
+}
+
+function searchArray($id,$array) {
+	$keyArray = array();
+	foreach ($array as $key => $val) {
+    if($val['id'] === $id) {
+     array_push($keyArray, $key);
+    }
+  }
+  return $keyArray;
+}
+
+function searchArrayOne($id,$array) {
+   foreach ($array as $key => $val) {
+	   if($val['id'] === $id) {
+		  return "$key";
+		  break;
+	   }
+   }
+   return null;
+}
+
+function clean_inputHTMLJSON($data) {
+	   $data = trim($data);
+	   $data = addslashes($data);
+	   //$data = htmlspecialchars($data);
+	   return $data;
+	}
