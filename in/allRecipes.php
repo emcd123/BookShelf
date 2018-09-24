@@ -1,16 +1,12 @@
 <?php
-session_start(); include('../db/config.php');
-include('../classes/User.php');
-
+session_start(); include('db/config.php');
 $timeStamp = date("Y-m-d H:i");
 $userName = $_SESSION['username'];
 $userId = $_SESSION['userId'];
-//$user = new User();
 if($userId === NULL){
 	header("Location:index.php");
 	exit;
 }
-//$user->get_name($userName);
 
 ?>
 <!DOCTYPE html>
@@ -42,28 +38,11 @@ if($userId === NULL){
 		<a href="#">Settings</a>
 	</div>
 
-  <div class="standard timeout">
-    <h2>Welcome <?php echo $userName; ?> </h2>
-    <p>What's for dinner tonight?</p>
-	</div>
-	<div class="standard">
-		<?php
-		$sql = "SELECT * FROM recipes WHERE userId = '$userId' AND deleted IS NOT NULL";
-		$query = mysqli_query($conn, $sql);
-		$numrows = mysqli_num_rows($query);
-		if($numrows > 0 ){
-
-		}
-		else{
-			echo '<p> It appears you have not added any recipes just yet. </p> <a href="allRecipes.php">Click Here to Start!</a> ';
-		}
-		?>
-  </div>
+  <button class="standard btn btn-lg bt-primary" type="button" id="newRecipe">Add Recipe</button>
 
 	<!-- jQuery first, then Tether, then Bootstrap JS. -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	</body>
 </body>

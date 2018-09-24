@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(!empty($_POST['username']) && !empty($_POST['password'])){
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			$sql = "SELECT * FROM users Where username='$username' AND password='$password'";
+			echo $sql = "SELECT username,password FROM users Where username='$username' AND password='$password'";
 			$query = mysqli_query($conn, $sql);
-			$numrows = mysqli_num_rows($query);
+			echo $numrows = mysqli_num_rows($query);
 			if ($numrows > 0) {
 				$updatesql = "UPDATE users SET lastLogin = '$timeStamp' WHERE username='$username' AND password='$password'";
 				$updatequery = mysqli_query($conn, $updatesql);
@@ -45,11 +45,11 @@ if(isset($_POST['register']) ){
 
     header("location: :in/mainDash.php");
 	exit();
-}
+}/*
 if(!isset($_POST['username'])){
 	session_destroy();
 	session_unset();
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
