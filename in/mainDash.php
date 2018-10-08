@@ -5,13 +5,32 @@ include('../classes/User.php');
 $timeStamp = date("Y-m-d H:i");
 $userName = $_SESSION['username'];
 $userId = $_SESSION['userId'];
-//$user = new User();
-if($userId === NULL){
-	header("Location:index.php");
-	exit;
-}
-//$user->get_name($userName);
 
+$user = new User($timeStamp, $userName, $userId);
+
+//Kicks user back to login if they do not have a session created
+$user->kick_user();
+
+function fetchRecipes(){
+	$recipeArray = array();
+	$sql = "SELECT * FROM recipes WHERE userId = '$user->userId' AND deleted IS NOT NULL";
+	$query = mysqli_query($conn, $sql);
+	$numrows = mysqli_num_rows($query);
+	if($numrows > 0 ){
+		while($recipes = mysqli_fetch_array($query)){
+			$recipeId = $recipes['id'];
+			$recipeName = $recipe['name'];
+			$array = array('id' => $recipeId, 'name' => $recipeName);
+		}
+		array_push($recipeArray, $array);
+	}
+	return $recipeArray;
+}
+function displayRecipesRecent($arr){
+	//Dsiplaying 10 most recent recipes (need to include tracker for recency), full list will appear elsewhere.
+	//Want to display as picture on the right, with title, prep time, cook time, allergies, description on left.
+	return '<table></table>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,15 +67,11 @@ if($userId === NULL){
 	</div>
 	<div class="standard">
 		<?php
-		$sql = "SELECT * FROM recipes WHERE userId = '$userId' AND deleted IS NOT NULL";
-		$query = mysqli_query($conn, $sql);
-		$numrows = mysqli_num_rows($query);
-		if($numrows > 0 ){
-
-		}
-		else{
-			echo '<p> It appears you have not added any recipes just yet. </p> <a href="allRecipes.php">Click Here to Start!</a> ';
-		}
+			//Checks if user has any recipes and prompts them to create one if not
+			$user->check_new_user();
+			//Display Content
+			$recipes = fetchRecipes();
+			echo displayRecipesRecent($recipes);
 		?>
   </div>
 

@@ -3,7 +3,6 @@ class User{
   public $timestamp;
   public $userName;
   public $userId;
-
   public function __construct($ts, $un, $uId){
     $this->timestamp = $ts;
     $this->userName = $un;
@@ -14,20 +13,33 @@ class User{
     $this->userName = $un;
     $this->userId = $uId;
   }
-
+  
   function kick_user(){
     if($this->userId === NULL){
     	header("Location:../index.php");
     	exit;
     }
-  
+  }
 
+  function get_time(){
+    return $this->timestamp;
+  }
   function get_name(){
     return $this->userName;
   }
-}
-$today = date('Y-m-d');
-$user = new User($today, 'Owen', '1');
+  function get_id(){
+    return $this->userId;
+  }
 
-echo $user->get_name();
+  function check_new_user(){
+    $sql = "SELECT * FROM recipes WHERE userId = '$this->userId' AND deleted IS NOT NULL";
+    $query = mysqli_query($conn, $sql);
+    $numrows = mysqli_num_rows($query);
+    if($numrows > 0 ){
+    }
+    else{
+      echo '<p> It appears you have not added any recipes just yet. </p> <a href="allRecipes.php">Click Here to Start!</a> ';
+    }
+  }
+}
 ?>

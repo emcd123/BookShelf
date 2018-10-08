@@ -5,15 +5,15 @@ class inputMethods{
   public $userName;
   public $userId;
 
-  public function __construct($ts, $un, $uId){
-    $this->timestamp = $ts;
-    $this->userName = $un;
-    $this->userId = $uId;
+  public function __construct($timestamp, $username, $userId){
+    $this->$timestamp = $timestamp;
+    $this->$userName = $userName;
+    $this->$userId = $userId;
   }
   public function __destruct(){
-    $this->timestamp = $ts;
-    $this->userName = $un;
-    $this->userId = $uId;
+    $this->$timestamp = $timestamp;
+    $this->$userName = $userName;
+    $this->$userId = $userId;
   }
 
   function searchArrayDates($date,$array) {
