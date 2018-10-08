@@ -1,13 +1,17 @@
 <?php
-session_start(); include('db/config.php');
+session_start();
+include('db/config.php');
+include('../classes/User.php');
+include('../classes/recipeContent.php');
 $timeStamp = date("Y-m-d H:i");
 $userName = $_SESSION['username'];
 $userId = $_SESSION['userId'];
-if($userId === NULL){
-	header("Location:index.php");
-	exit;
-}
 
+$user = new User($timeStamp, $userName, $userId);
+$recipe = new Recipe($timeStamp, $userName, $userId);
+//Kicks user back to login if they do not have a session created
+$user->kick_user();
+$recipeArray = $recipe->fetchRecipes();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +32,7 @@ if($userId === NULL){
   <div class="topnav">
     <a class="active" href="mainDash.php">HomeShelf</a>
     <a class="user" href="#"> <?php echo $userName; ?> </a>
-		<button type="button" class="btn btn-success btn-sm" onclick="location.href='../index.php'" style="margin-top: 12px;"> Log Out </button>
+		<button type="button" class="btn btn-success btn-lg" onclick="location.href='../index.php'" style="margin-top: 12px;"> Log Out </button>
   </div>
 	<div class="sidenav">
 		<a href="mainDash.php">DashBoard</a>
@@ -38,12 +42,16 @@ if($userId === NULL){
 		<a href="#">Settings</a>
 	</div>
 
-  <button class="standard btn btn-lg bt-primary" type="button" id="newRecipe">Add Recipe</button>
+  <button class="main btn btn-sm btn-primary" type="button" id="newRecipe">Add Recipe</button>
 
 	<!-- jQuery first, then Tether, then Bootstrap JS. -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script>
+	$(document).on("click", "#newRecipe", function(){
+		$("#modalNewRecipe").modal('show');
+	});
+	</script>
 	</body>
-</body>
 </html>

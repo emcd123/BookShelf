@@ -13,10 +13,10 @@ class User{
     $this->userName = $un;
     $this->userId = $uId;
   }
-  
+
   function kick_user(){
     if($this->userId === NULL){
-    	header("Location:../index.php");
+    	header("Location:../../index.php");
     	exit;
     }
   }

@@ -1,36 +1,17 @@
 <?php
 session_start(); include('../db/config.php');
 include('../classes/User.php');
+include('../classes/recipeContent.php');
 
 $timeStamp = date("Y-m-d H:i");
 $userName = $_SESSION['username'];
 $userId = $_SESSION['userId'];
 
 $user = new User($timeStamp, $userName, $userId);
-
+$recipe = new Recipe($timeStamp, $userName, $userId);
 //Kicks user back to login if they do not have a session created
 $user->kick_user();
-
-function fetchRecipes(){
-	$recipeArray = array();
-	$sql = "SELECT * FROM recipes WHERE userId = '$user->userId' AND deleted IS NOT NULL";
-	$query = mysqli_query($conn, $sql);
-	$numrows = mysqli_num_rows($query);
-	if($numrows > 0 ){
-		while($recipes = mysqli_fetch_array($query)){
-			$recipeId = $recipes['id'];
-			$recipeName = $recipe['name'];
-			$array = array('id' => $recipeId, 'name' => $recipeName);
-		}
-		array_push($recipeArray, $array);
-	}
-	return $recipeArray;
-}
-function displayRecipesRecent($arr){
-	//Dsiplaying 10 most recent recipes (need to include tracker for recency), full list will appear elsewhere.
-	//Want to display as picture on the right, with title, prep time, cook time, allergies, description on left.
-	return '<table></table>';
-}
+$recipeArray = $recipe->fetchRecipes();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,8 +51,7 @@ function displayRecipesRecent($arr){
 			//Checks if user has any recipes and prompts them to create one if not
 			$user->check_new_user();
 			//Display Content
-			$recipes = fetchRecipes();
-			echo displayRecipesRecent($recipes);
+			echo displayRecipesRecent($recipeArray);
 		?>
   </div>
 
