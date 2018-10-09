@@ -27,6 +27,7 @@ $recipeArray = $recipe->fetchRecipes();
 <script>
 	setTimeout("$('.timeout').slideUp()", 2000);
 </script>
+
 </head>
 <body>
   <div class="topnav">
