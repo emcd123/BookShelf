@@ -68,5 +68,21 @@ class Recipe{
     </tbody>
     </table>';
   }
+
+  function add_recipe($arr, $flag, $conn){
+    //name, description, prepTime, cookTime, region, difficulty, spice
+    $name = $arr[0];
+    $description = $arr[1];
+    $prepTime = $arr[2];
+    $cookTime = $arr[3];
+    $region = $arr[4];
+    $difficulty = $arr[5];
+    $spice = $arr[6];
+
+    echo $sqlAdd = "INSERT INTO recipes (createdBy, created, name, description, region, difficulty, spice, prepTime, cookTime)
+              VALUES('$this->userId', '$this->timestamp', '$name', '$description', '$region', '$difficulty', '$spice', '$prepTime', '$cookTime')";
+    $queryAdd = mysqli_query($conn, $sqlAdd);
+  }
 }
+
 ?>

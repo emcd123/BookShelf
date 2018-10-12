@@ -64,9 +64,9 @@ $recipeArray = $recipe->fetchRecipes();
         </div>
 				<form action="/action_page.php">
 					<div class="modal-body">
-					  Name: <input type="text" id="recipeName" value="Dish Name">
+					  Name: <input type="text" id="recipeName" value="">
 					  <br><br>
-					  Description: <textarea id="recipedescription" value="..."></textArea>
+					  Description: <textarea id="recipeDescription" value=""></textArea>
 						<br><br>
 						<div> Spice:
 							<input type="radio" id="mildSpice" class="spice" value="1">
@@ -104,10 +104,31 @@ $recipeArray = $recipe->fetchRecipes();
 		$("#modalNewRecipe").modal('show');
 	});
 	$(document).on("click", "#addRecipe", function(){
+		var name = $("#recipeName").val();
+		var description = $("#recipeDescription").val();
+		var prepTime = $("#recipePrepTime").val();
+		var cookTime = $("#recipeCookTime").val();
+		var region = $("#recipeRegion").val();
+		var difficulty = $("#recipeDifficulty").val();
 		if ($('input[class=spice]:checked').length > 0) {
 			var spice = $('input[class=spice]:checked').val();
-    	console.log(spice);
+    	//console.log(spice);
 		}
+		var recipeData = [name, description, prepTime, cookTime, region, difficulty, spice];
+		//console.log(recipeData);
+		recipeData = JSON.stringify(recipeData);
+		$.ajax({
+			method: "POST",
+			url: "../ajax/addRecipe.php",
+			data: {recipeData:recipeData},
+			success: function(data){
+				console.log(data);
+				window.location.reload(true);
+			},
+			error: function(data){
+				console.log('error');
+			}
+		});
 	});
 	</script>
 	</body>
