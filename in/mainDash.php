@@ -11,7 +11,8 @@ $user = new User($timeStamp, $userName, $userId);
 $recipe = new Recipe($timeStamp, $userName, $userId);
 //Kicks user back to login if they do not have a session created
 $user->kick_user();
-$recipeArray = $recipe->fetchRecipes();
+$recipeArray = $recipe->fetchRecipes($conn);
+//print_r($recipeArray);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +24,6 @@ $recipeArray = $recipe->fetchRecipes();
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel = "stylesheet" type = "text/css" href = "../stylesheets/navigationBars.css" />
-
-<script>
-	setTimeout("$('.timeout').slideUp()", 2000);
-</script>
 
 </head>
 <body>
@@ -50,17 +47,39 @@ $recipeArray = $recipe->fetchRecipes();
 	<div class="standard">
 		<?php
 			//Checks if user has any recipes and prompts them to create one if not
-			$user->check_new_user();
-			//Display Content
-			echo displayRecipesRecent($recipeArray);
+			echo $user->check_new_user($conn);
 		?>
+		<button type="button" class="btn btn-success" id="displayRecipe">Show Recipes</button>
   </div>
+	<div class="standard col-lg-12">
+		<div class="col-sm-12" id="displayRecipeDiv"></div>
+	</div>
+	<script>
+		window.setTimeout(function(){$('.timeout').slideUp()}, 2000);
+	</script>
 
 	<!-- jQuery first, then Tether, then Bootstrap JS. -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		$("#displayRecipe").on("click", function(){
+			$.ajax({
+				method: "POST",
+				url: "../ajax/displayRecipe.php",
+				success: function(data){
+					//console.log(data);
+					$("#displayRecipeDiv").show();
+					$("#displayRecipeDiv").html(data);
+				},
+				error: function(data){
+					console.log('error');
+				}
+			});
+		});
+	</script>
 	</body>
 </body>
 </html>

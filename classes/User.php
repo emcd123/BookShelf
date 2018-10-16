@@ -16,7 +16,7 @@ class User{
 
   function kick_user(){
     if($this->userId === NULL){
-    	header("Location:../../index.php");
+    	header("Location:../index.php");
     	exit;
     }
   }
@@ -31,14 +31,15 @@ class User{
     return $this->userId;
   }
 
-  function check_new_user(){
-    $sql = "SELECT * FROM recipes WHERE userId = '$this->userId' AND deleted IS NOT NULL";
+  function check_new_user($conn){
+    $sql = "SELECT * FROM recipes WHERE userId = '$this->userId' AND deleted IS NULL";
     $query = mysqli_query($conn, $sql);
     $numrows = mysqli_num_rows($query);
     if($numrows > 0 ){
+      return 'Welcome Back';
     }
     else{
-      echo '<p> It appears you have not added any recipes just yet. </p> <a href="allRecipes.php">Click Here to Start!</a> ';
+      return '<p> It appears you have not added any recipes just yet. </p> <a href="allRecipes.php">Click Here to Start!</a> ';
     }
   }
 }

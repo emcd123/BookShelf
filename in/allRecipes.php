@@ -43,6 +43,7 @@ $recipeArray = $recipe->fetchRecipes();
 		<a href="#">Settings</a>
 	</div>
 	<div class="container standard">
+    <div id="alertAdd" class="timeout standard" style="display:none;"></div>
 	  <div class="row">
 	    <div class="col-sm-10">
 	      <i class="fa fa-angle-right"><a style="font-size:20px;" href="allRecipes.php">Recipes</a></i>
@@ -122,8 +123,11 @@ $recipeArray = $recipe->fetchRecipes();
 			url: "../ajax/addRecipe.php",
 			data: {recipeData:recipeData},
 			success: function(data){
-				console.log(data);
-				window.location.reload(true);
+				//console.log(data);
+				//window.location.reload(true);
+        $("#modalNewRecipe").modal('hide');
+        $("#alertAdd").show();
+        $("#alertAdd").html(data);
 			},
 			error: function(data){
 				console.log('error');
