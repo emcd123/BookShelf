@@ -7,7 +7,7 @@ $timeStamp = date("Y-m-d H:i");
 $userName = $_SESSION['username'];
 $userId = $_SESSION['userId'];
 
-$user = new User($timeStamp, $userName, $userId);
+$user = new ServiceUser($timeStamp, $userName, $userId);
 $recipe = new Recipe($timeStamp, $userName, $userId);
 //Kicks user back to login if they do not have a session created
 $user->kick_user();

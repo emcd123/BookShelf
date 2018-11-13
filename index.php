@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(!empty($_POST['username']) && !empty($_POST['password'])){
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			echo $sql = "SELECT username,password FROM users Where username='$username' AND password='$password'";
+			$sql = "SELECT username,password FROM users Where username='$username' AND password='$password'";
 			$query = mysqli_query($conn, $sql);
-			echo $numrows = mysqli_num_rows($query);
+			$numrows = mysqli_num_rows($query);
 			if ($numrows > 0) {
 				$updatesql = "UPDATE users SET lastLogin = '$timeStamp' WHERE username='$username' AND password='$password'";
 				$updatequery = mysqli_query($conn, $updatesql);
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(isset($_POST['register']) ){
 		$userName = $_POST['usernameSignUp'];
     $password = $_POST['passwordSignUp'];
-		echo $sql = "INSERT INTO users (username,password, lastLogin, permissions) VALUES ('$userName','$password','$timeStamp', '2') ";
+		$sql = "INSERT INTO users (username,password, lastLogin, permissions) VALUES ('$userName','$password','$timeStamp', '2') ";
 		$result = mysqli_query($conn, $sql);
     if((!$result) && ($result->num_rows === NULL)){
 			die( "Data was not updated. Please try again later. <a href='question_review.php'>Click here</a> to return to Home page.".mysqli_error($conn));
