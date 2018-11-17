@@ -1,5 +1,6 @@
 <?php
 session_start(); include('db/config.php');
+include('classes/AccUtilities.php');
 $timeStamp = date("Y-m-d H:i");
 $username = $password = '';
 //Log In Existing User
@@ -8,28 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(!empty($_POST['username']) && !empty($_POST['password'])){
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			$sql = "SELECT username,password FROM users Where username='$username' AND password='$password'";
-			$query = mysqli_query($conn, $sql);
-			$numrows = mysqli_num_rows($query);
-			if ($numrows > 0) {
-				$updatesql = "UPDATE users SET lastLogin = '$timeStamp' WHERE username='$username' AND password='$password'";
-				$updatequery = mysqli_query($conn, $updatesql);
-				$_SESSION['username']=$username;
-
-				$sql2 = "SELECT id FROM users Where username='$username' AND password='$password'";
-				$query2 = mysqli_query($conn, $sql2);
-				while($result = mysqli_fetch_array($query2)){
-					$_SESSION['userId'] = $result['id'];
-				}
-				header("Location:in/mainDash.php");
-				exit;
-			}
-			else{
-					echo '<div class="alert alert-danger message">Username/Password is not correct</div>';
-			}
-		}
-		else{
-			echo '<div class="alert alert-danger message">Username/Password field cannot be blank</div>';
+			
+			$accUtil = new AccUtilities($conn, $timeStamp);
+			$accUtil->authenticate_user($userName, $password);
 		}
 	}
 }
@@ -37,13 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(isset($_POST['register']) ){
 		$userName = $_POST['usernameSignUp'];
     $password = $_POST['passwordSignUp'];
-		$sql = "INSERT INTO users (username,password, lastLogin, permissions) VALUES ('$userName','$password','$timeStamp', '2') ";
-		$result = mysqli_query($conn, $sql);
-    if((!$result) && ($result->num_rows === NULL)){
-			die( "Data was not updated. Please try again later. <a href='question_review.php'>Click here</a> to return to Home page.".mysqli_error($conn));
-    }
-
-    header("location: :in/mainDash.php");
+		$accUtil = new AccUtilities($conn, $timeStamp);
+		$accUtil->create_new_user($userName, $password);
+    header("location: in/mainDash.php");
 	exit();
 }/*
 if(!isset($_POST['username'])){

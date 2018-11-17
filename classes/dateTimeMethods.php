@@ -1,16 +1,18 @@
 <?php
-session_start(); include('../db/config.php');
 class dateTimeMethods{
   public $timestamp;
   public $userName;
   public $userId;
+  public $conn;
 
-  public function __construct($ts, $un, $uId){
+  public function __construct($conn,$ts, $un, $uId){
+    $this->conn = $conn;
     $this->timestamp = $ts;
     $this->userName = $un;
     $this->userId = $uId;
   }
   public function __destruct(){
+    $this->conn = $conn;
     $this->timestamp = $ts;
     $this->userName = $un;
     $this->userId = $uId;
