@@ -27,6 +27,7 @@ if(isset($_POST['register']) ){
 		$accUtil->create_new_user($userName, $password);
     header("location: in/mainDash.php");
 	exit();
+}
 ?>
 
 <!DOCTYPE html>

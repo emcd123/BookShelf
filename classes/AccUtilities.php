@@ -13,25 +13,6 @@ class AccUtilities{
     $this->timestamp = $ts;
   }
 
-  function kick_user(){
-    if($this->userId === NULL){
-    	header("Location:http://localhost/HomeChef/index.php");
-    	exit;
-    }
-  }
-
-  function check_new_user(){
-    $sql = "SELECT * FROM recipes WHERE userId = '$this->userId' AND deleted IS NULL";
-    $query = mysqli_query($this->conn, $sql);
-    $numrows = mysqli_num_rows($query);
-    if($numrows > 0 ){
-      return 'Welcome Back';
-    }
-    else{
-      return '<p> It appears you have not added any recipes just yet. </p> <a href="allRecipes.php">Click Here to Start!</a> ';
-    }
-  }
-  
   function authenticate_user($username, $password){
     if(!empty($username) && !empty($password)){
       $sql = "SELECT username,password FROM users Where username='$username' AND password='$password'";

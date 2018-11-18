@@ -1,7 +1,7 @@
 <?php
 session_start(); include('../db/config.php');
 include('../classes/User.php');
-include('../classes/recipeContent.php');
+include('../classes/recipe.php');
 
 $timeStamp = date("Y-m-d H:i");
 echo $userName = $_SESSION['username'];
@@ -9,6 +9,7 @@ $userId = $_SESSION['userId'];
 
 $user = new ServiceUser($conn, $timeStamp, $userName, $userId);
 $recipe = new Recipe($timeStamp, $userName, $userId);
+$sessUtil = new SessionUtils($conn, $timeStamp);
 //Kicks user back to login if they do not have a session created
 $user->kick_user();
 $recipeArray = $recipe->fetchRecipes($conn);
@@ -47,7 +48,7 @@ $recipeArray = $recipe->fetchRecipes($conn);
 	<div class="standard">
 		<?php
 			//Checks if user has any recipes and prompts them to create one if not
-			echo $user->check_new_user($conn);
+			echo $sessUtil->check_new_user($user->get_id());
 		?>
 		<button type="button" class="btn btn-success" id="displayRecipe">Show Recipes</button>
   </div>

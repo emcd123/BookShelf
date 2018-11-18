@@ -1,17 +1,18 @@
 <?php
 session_start(); include('db/config.php');
 include('classes/AccUtilities.php');
+include('classes/sessionUtils.php');
 $timeStamp = date("Y-m-d H:i");
 $username = $password = '';
+$accUtil = new AccUtilities($conn, $timeStamp);
+$sessUtil = new SessionUtilities($conn, $timeStamp);
 //Log In Existing User
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(isset($_POST['username'])){
 		if(!empty($_POST['username']) && !empty($_POST['password'])){
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			
-			$accUtil = new AccUtilities($conn, $timeStamp);
-			$accUtil->authenticate_user($userName, $password);
+			$accUtil->authenticate_user($username, $password);
 		}
 	}
 }
@@ -19,15 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(isset($_POST['register']) ){
 		$userName = $_POST['usernameSignUp'];
     $password = $_POST['passwordSignUp'];
-		$accUtil = new AccUtilities($conn, $timeStamp);
 		$accUtil->create_new_user($userName, $password);
     header("location: in/mainDash.php");
 	exit();
-}/*
+}
+
 if(!isset($_POST['username'])){
-	session_destroy();
-	session_unset();
-}*/
+	$sessUtil->kill_session();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

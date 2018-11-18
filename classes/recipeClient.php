@@ -1,23 +1,27 @@
 <?php
-class Recipe{
+class RecipeClient{
   public $timestamp;
   public $userName;
   public $userId;
-  public function __construct($ts, $un, $uId){
+  public $conn;
+
+  public function __construct($conn, $ts, $un, $uId){
+    $this->conn = $conn;
     $this->timestamp = $ts;
     $this->userName = $un;
     $this->userId = $uId;
   }
   public function __destruct(){
+    $this->conn = $conn;
     $this->timestamp = $ts;
     $this->userName = $un;
     $this->userId = $uId;
   }
 
-  function fetchRecipes($conn){
+  function fetchRecipes($userId){
   	$recipeArray = array();
-  	$sql = "SELECT * FROM recipes WHERE userId = '$this->userId' AND deleted IS NULL";
-  	$query = mysqli_query($conn, $sql);
+  	$sql = "SELECT * FROM recipes WHERE userId = '$userId' AND deleted IS NULL";
+  	$query = mysqli_query($this->conn, $sql);
   	$numrows = mysqli_num_rows($query);
   	if($numrows > 0 ){
   		while($recipe = mysqli_fetch_array($query)){
@@ -36,7 +40,7 @@ class Recipe{
   	return $recipeArray;
   }
 
-  function displayRecipesRecent($arr,$conn){
+  function displayRecipesRecent($arr){
   	//Dsiplaying 10 most recent recipes (need to include tracker for recency), full list will appear elsewhere.
   	//Want to display as picture on the right, with title, prep time, cook time, allergies, description on left.
     //print_r($arr);
@@ -84,22 +88,5 @@ class Recipe{
     </tbody>
     </table>';*/
   }
-
-  function add_recipe($arr, $conn){
-    //name, description, prepTime, cookTime, region, difficulty, spice
-    $name = $arr[0];
-    $description = $arr[1];
-    $prepTime = $arr[2];
-    $cookTime = $arr[3];
-    $region = $arr[4];
-    $difficulty = $arr[5];
-    $spice = $arr[6];
-
-    $sqlAdd= "INSERT INTO recipes (createdBy, created, name, description, region, difficulty, spice, prepTime, cookTime, userId)
-              VALUES('$this->userId', '$this->timestamp', '$name', '$description', '$region', '$difficulty', '$spice', '$prepTime', '$cookTime', '$this->userId')";
-    $queryAdd = mysqli_query($conn, $sqlAdd);
-    return '<div class="alert alert-success"><strong>Success!</strong> Recipe Has Been Added</div>';
-  }
 }
-
 ?>
