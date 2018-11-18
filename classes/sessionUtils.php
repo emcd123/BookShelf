@@ -13,6 +13,14 @@ class SessionUtils{
     $this->timestamp = $ts;
   }
 
+  /*********************************************************
+  All methods needed to verify and rest sessions.
+
+  Also used to check certain responses for ServiceUsers
+  who have a valid session assigned to them.
+
+  **********************************************************/
+
   function kick_user($userId){
     if($userId === NULL){
     	header("Location:http://localhost/HomeChef/index.php");

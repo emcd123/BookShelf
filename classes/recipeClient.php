@@ -18,6 +18,14 @@ class RecipeClient{
     $this->userId = $uId;
   }
 
+  /*********************************************************
+
+  All CRUD methods for recipes table are in Recipe.
+
+  Model contains only methods which do not affect the
+  recipes db table.
+
+  **********************************************************/
   function fetchRecipes($userId){
   	$recipeArray = array();
   	$sql = "SELECT * FROM recipes WHERE userId = '$userId' AND deleted IS NULL";

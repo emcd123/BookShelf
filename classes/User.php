@@ -18,18 +18,26 @@ class ServiceUser{
     $this->userId = $uId;
   }
 
-  //Getters
+  /*********************************************************
+  Contains Getter methods for the ServiceUser Model.
+  Means values can be set on init and not changed unexpectedly.
+
+  Also contains the CRUD methods for ServiceUsers
+
+  **********************************************************/
+
   function get_time(){
     return $this->timestamp;
   }
+
   function get_name(){
     return $this->userName;
   }
+  
   function get_id(){
     return $this->userId;
   }
 
-  //Account Updating Methods
   function update_name($newName){
     echo $sqlUpdateName = "UPDATE users SET username='$newName', updated='$this->timestamp' WHERE id='$this->userId'";
     $queryUpdateName = mysqli_query($this->conn, $sqlUpdateName);

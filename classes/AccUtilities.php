@@ -13,6 +13,15 @@ class AccUtilities{
     $this->timestamp = $ts;
   }
 
+  /*********************************************************
+  Contains the methods dealing with account
+  verification. Needs to be completely modular and
+  called as infrequently as possible.
+
+  Methods are not tied to a specific user.
+
+  **********************************************************/
+
   function authenticate_user($username, $password){
     if(!empty($username) && !empty($password)){
       $sql = "SELECT username,password FROM users Where username='$username' AND password='$password'";
