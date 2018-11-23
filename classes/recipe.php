@@ -33,7 +33,7 @@ class Recipe{
   function get_id(){
     return $this->recipeId;
   }
-  
+
   function get_name(){
     $id = get_id();
     $sql = "SELECT name FROM recipes WHERE id='$id' LIMIT 1";
@@ -72,14 +72,21 @@ class Recipe{
   }
 
   function update_recipe($arr, $userId){
-    $sql = "UPDATE recipes SET WHERE id='$this->recipeId' AND userId='$userId'";
+    // array will be associative. Column name is key, new value is values
+    $keyArray = array_keys($arr);
+    $strUpdate = '';
+    foreach ($keyArray as $key) {
+      $strUpdate =  $strUpdate . "'$key'" . '=' . "'$arr[$key]' . ','";
+    }
+    rtrim($strUpdate, ',');
+    $sql = "UPDATE recipes SET '$strUpdate' WHERE id='$this->recipeId' AND userId='$userId'";
     $query = mysqli_query($this->conn, $sql);
     if(!$qeury){
       die( "Data was not updated. Please try again later. <a href='question_review.php'>Click here</a> to return to Home page.".mysqli_error($conn));
     }
   }
 
-  function delete_recipe(){
+  function delete_recipe($userId){
     $sql = "UPDATE recipes SET deleted='$this->timestamp', deletedBy='$userId' WHERE id='$this->recipeId'";
     $query = mysqli_query($this->conn, $sql);
     if(!$qeury){
