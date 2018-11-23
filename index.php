@@ -1,7 +1,7 @@
 <?php
 session_start(); include('db/config.php');
-include('classes/AccUtilities.php');
-include('classes/sessionUtils.php');
+include('Models/AccUtilities.php');
+include('Models/sessionUtils.php');
 $timeStamp = date("Y-m-d H:i");
 $username = $password = '';
 $accUtil = new AccUtilities($conn, $timeStamp);

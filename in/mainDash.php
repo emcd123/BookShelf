@@ -1,7 +1,7 @@
 <?php
 session_start(); include('../db/config.php');
-include('../classes/User.php');
-include('../classes/recipe.php');
+include('../Models/User.php');
+include('../Models/recipe.php');
 
 $timeStamp = date("Y-m-d H:i");
 echo $userName = $_SESSION['username'];

@@ -1,6 +1,6 @@
 <?php
 session_start(); include('db/config.php');
-include('classes/User.php');
+include('Models/User.php');
 
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);

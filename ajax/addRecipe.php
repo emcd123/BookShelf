@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('../db/config.php');
-include('../classes/User.php');
-include('../classes/recipeContent.php');
+include('../Models/User.php');
+include('../Models/recipeContent.php');
 $timeStamp = date("Y-m-d H:i");
 $userName = $_SESSION['username'];
 $userId = $_SESSION['userId'];
